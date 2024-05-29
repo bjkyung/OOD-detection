@@ -1,0 +1,53 @@
+version: '2.3'
+
+services:
+  main:
+    container_name: ood-detection
+    build:
+      context: ./
+      dockerfile: docker/main/Dockerfile
+    runtime: nvidia
+    restart: always
+    ipc: "host"
+    env_file:
+      - "docker/env.env"
+    volumes:
+      - ${PWD}:/workspace
+      - dataset:/dataset
+      - mlsun:/mlsun
+    ports:
+      - "11000:8000"
+      - "11022:22"
+    stdin_open: true
+    tty: true
+    environment:
+      TZ: Asia/Seoul
+  alphapose:
+    container_name: abd-alphapose
+    build:
+      context: ./
+      dockerfile: docker/pose/alphapose/dockerfile
+    env_file:
+      - "docker/env.env"
+    runtime: nvidia
+    restart: always
+    ipc: "host"
+    volumes:
+      - ${PWD}:/workspace
+      - dataset:/dataset
+      - mlsun:/mlsun
+    stdin_open: true
+    tty: true
+
+volumes:
+  dataset:
+    driver: local
+    driver_opts:
+      type: none
+      device: /DATA/abd
+      o: bind
+  mlsun:
+    driver_opts:
+      type: "nfs"
+      o: "addr=mlsun.sogang.ac.kr,nolock,soft,rw"
+      device: ":/volume1/nfs_shared"
