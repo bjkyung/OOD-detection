@@ -15,8 +15,8 @@ def load_pipeline():
 
 def main():
     parser = argparse.ArgumentParser(description="Generate image from a text prompt using StableDiffusionXLPipeline.")
-    parser.add_argument("--prompt", type=str, default='Cute white dog walking in the park', help="Text prompt to generate image.")
-    parser.add_argument("--save_path", type=str, default='/workspace/data/results/xl_results.jpg', help="Path to save the generated image.")
+    parser.add_argument("--prompt", type=str, default='A man skiing downhill', help="Text prompt to generate image.")
+    parser.add_argument("--save_path", type=str, default='/workspace/data/images/xl_results.jpg', help="Path to save the generated image.")
     args = parser.parse_args()
 
     pipeline, _ = load_pipeline()
