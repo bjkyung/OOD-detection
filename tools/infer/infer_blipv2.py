@@ -19,7 +19,7 @@ def main(image_path, model_name, prompt):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run BLIP2 model on an image.")
-    parser.add_argument("--image_path", type=str, required=True, help="Path to the image file.")
+    parser.add_argument("--image_path", type=str, default='/workspace/data/images/xl_results.jpg', help="Path to the image file.")
     parser.add_argument("--model_name", type=str, default="Salesforce/blip2-opt-2.7b", help="Name of the model to use.")
     parser.add_argument("--prompt", type=str, default='The photo of ', help="Prompt to use for the model.")
 
