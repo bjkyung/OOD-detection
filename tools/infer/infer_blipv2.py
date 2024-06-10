@@ -3,6 +3,16 @@ from PIL import Image
 from transformers import Blip2Processor, Blip2Model
 import torch
 
+def generate_caption(image_path, processor, model, device, prompt):
+    try:
+        raw_image = Image.open(image_path).convert('RGB')
+    except FileNotFoundError:
+        print(f'File not found: {image_path}')
+        return None
+    inputs = processor(images=raw_image, text=prompt, return_tensors="pt").to(device, torch.float16)
+    out = model.generate(**inputs)
+    return processor.decode(out[0], skip_special_tokens=True)
+
 def main(image_path, model_name, prompt):
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -10,12 +20,9 @@ def main(image_path, model_name, prompt):
     model = Blip2Model.from_pretrained(model_name, torch_dtype=torch.float16)
     model.to(device)
 
-    image = Image.open(image_path).convert("RGB")
-
-    inputs = processor(images=image, text=prompt, return_tensors="pt").to(device, torch.float16)
-
-    outputs = model(**inputs)
-    print(outputs)
+    caption = generate_caption(image_path, processor, model, device, prompt)
+    if caption:
+        print(f"Generated Caption: {caption}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run BLIP2 model on an image.")
