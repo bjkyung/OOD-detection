@@ -1,0 +1,52 @@
+# base ----------------------------------------
+matplotlib>=3.2.2
+numpy>=1.18.5
+opencv-python>=4.1.2
+Pillow
+PyYAML>=5.3.1
+scipy>=1.4.1
+tqdm>=4.41.0
+PyYaml==6.0.1
+ruamel.yaml==0.17.32
+accelerate
+datasets
+hf-doc-builder
+huggingface-hub
+Jinja2
+librosa
+transformers
+
+# deepfloyd -------------------------------------
+sentencepiece
+xformers
+
+# diffusers-xl model -------------------------------------
+diffusers --upgrade
+invisible_watermark
+transformers
+accelerate
+safetensors
+requests
+
+# logging -------------------------------------
+tensorboard>=2.4.1
+wandb
+
+# plotting ------------------------------------
+seaborn>=0.11.0
+pandas
+
+# eval ----------------------------------------
+scikit-image==0.18.3
+
+# s2vs
+ffmpeg-python
+augly
+h5py
+einops
+timm
+typer
+imageio
+
+# de-identification eval
+piqa==1.3.1

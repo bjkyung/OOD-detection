@@ -12,9 +12,8 @@ services:
     env_file:
       - "docker/env.env"
     volumes:
-      - ${PWD}:/workspace
       - dataset:/dataset
-      - mlsun:/mlsun
+      - nfs_shared:/nfs_shared
     ports:
       - "11000:8000"
       - "11022:22"
@@ -23,19 +22,18 @@ services:
     environment:
       TZ: Asia/Seoul
   alphapose:
-    container_name: abd-alphapose
+    container_name: lift_map_detection
     build:
       context: ./
-      dockerfile: docker/pose/alphapose/dockerfile
+      dockerfile: docker/lift/Dockerfile
     env_file:
       - "docker/env.env"
     runtime: nvidia
     restart: always
     ipc: "host"
     volumes:
-      - ${PWD}:/workspace
       - dataset:/dataset
-      - mlsun:/mlsun
+      - nfs_shared:/nfs_shared
     stdin_open: true
     tty: true
 
@@ -44,10 +42,10 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /DATA/abd
+      device: /home/mmlab/hdd
       o: bind
-  mlsun:
+  nfs_shared:
     driver_opts:
       type: "nfs"
-      o: "addr=mlsun.sogang.ac.kr,nolock,soft,rw"
+      o: "addr=mldisk2.sogang.ac.kr,nolock,soft,rw"
       device: ":/volume1/nfs_shared"

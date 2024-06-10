@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.0-cudnn8-devel-ubuntu20.04
 
 ENV TZ Asia/Seoul
 ENV LC_ALL=C.UTF-8
@@ -16,7 +16,5 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes #prohibit-p
 
 RUN pip3 install --upgrade pip
 RUN pip3 install setuptools
-RUN pip3 install --upgrade diffusers[torch]
-RUN pip3 install torch==1.13.1+cu117 torchvision==0.14.1+cu117 --extra-index-url https://download.pytorch.org/whl/cu117
 
 WORKDIR /workspace
