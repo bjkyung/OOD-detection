@@ -42,7 +42,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/mmlab/hdd
+      device: /media/mmlab/hdd
       o: bind
   nfs_shared:
     driver_opts:
