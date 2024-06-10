@@ -1,3 +1,4 @@
+import os
 import torch
 import argparse
 from diffusers import StableDiffusionXLPipeline, AutoPipelineForText2Image
@@ -14,16 +15,22 @@ def load_pipeline():
     return pipeline, pipeline_text2image
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate image from a text prompt using StableDiffusionXLPipeline.")
+    parser = argparse.ArgumentParser(description="Stable Diffusion XL Text-to-Image Inference.")
     parser.add_argument("--prompt", type=str, default='A man skiing downhill', help="Text prompt to generate image.")
-    parser.add_argument("--save_path", type=str, default='/workspace/data/images/xl_results.jpg', help="Path to save the generated image.")
+    parser.add_argument("--save_dir", type=str, default='/workspace/data/images', help="Path to save the generated images.")
+    parser.add_argument("--num_images", type=int, default=1, help="Number of images to generate.")
     args = parser.parse_args()
 
     pipeline, _ = load_pipeline()
-    image = pipeline(prompt=args.prompt).images[0]
 
-    # Assuming image is a PIL Image. If not, you may need to convert it to a PIL Image first.
-    image.save(args.save_path)
+    if not os.path.exists(args.save_dir):
+        os.makedirs(args.save_dir)
+
+    for i in range(args.num_images):
+        image = pipeline(prompt=args.prompt).images[0]
+        save_path = os.path.join(args.save_dir, f"xl_results_{i+1}.jpg")
+        image.save(save_path)
+        print(f"Image saved to {save_path}")
 
 if __name__ == "__main__":
     main()
