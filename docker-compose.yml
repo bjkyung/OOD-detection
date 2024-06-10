@@ -21,7 +21,7 @@ services:
     tty: true
     environment:
       TZ: Asia/Seoul
-  alphapose:
+  lift:
     container_name: lift_map_detection
     build:
       context: ./
