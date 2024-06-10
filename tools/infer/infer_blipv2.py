@@ -1,6 +1,6 @@
 import argparse
 from PIL import Image
-from transformers import Blip2Processor, Blip2Model
+from transformers import Blip2Processor, Blip2ForConditionalGeneration
 import torch
 
 def generate_caption(image_path, processor, model, device, prompt):
@@ -17,7 +17,7 @@ def main(image_path, model_name, prompt):
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     processor = Blip2Processor.from_pretrained(model_name)
-    model = Blip2Model.from_pretrained(model_name, torch_dtype=torch.float16)
+    model = Blip2ForConditionalGeneration.from_pretrained(model_name, torch_dtype=torch.float16)
     model.to(device)
 
     caption = generate_caption(image_path, processor, model, device, prompt)
