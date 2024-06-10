@@ -9,7 +9,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Stable Diffusion Text-to-Image Inference.")
     parser.add_argument("--model", type=str, default="runwayml/stable-diffusion-v1-5",
                         help="Stable Diffusion model.")
-    parser.add_argument("--prompt", type=str, default='A man skiing downhill', required=True, help="Prompt for image generation.")
+    parser.add_argument("--prompt", type=str, default='A man skiing downhill', help="Prompt for image generation.")
     parser.add_argument("--save_dir", type=str, default="/workspace/data/images",
                         help="Path to the save image directory.")
     parser.add_argument("--num_images", type=int, default=1, help="Number of images to generate.")
