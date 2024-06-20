@@ -15,8 +15,8 @@ services:
       - dataset:/dataset
       - nfs_shared:/nfs_shared
     ports:
-      - "11000:8000"
-      - "11022:22"
+      - "11100:8000"
+      - "11122:22"
     stdin_open: true
     tty: true
     environment:
