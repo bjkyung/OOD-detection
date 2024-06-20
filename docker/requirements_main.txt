@@ -21,7 +21,7 @@ sentencepiece
 xformers
 
 # diffusers-xl model -------------------------------------
-diffusers --upgrade
+diffusers
 invisible_watermark
 transformers
 accelerate
